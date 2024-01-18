@@ -1,12 +1,23 @@
+interface ITodo {
+    title: String, 
+    description: String,
+    status: String,
+}
+
+interface ITodoSiteData {
+    name: String,
+    todos: ITodo[],
+}
+
 export const useTodoStore = defineStore('todoStore', {
-    state: () => ({
+    state: (): ITodoSiteData => ({
         name: '',
         todos: [],
     }),
     actions: {
         async fetch() {
             try {
-                const data = await $fetch("http://127.0.0.1:8000/todos/")
+                const data : ITodoSiteData = await $fetch("http://127.0.0.1:8000/todos/")
 
                 this.name = data.name
                 this.todos = data.todos

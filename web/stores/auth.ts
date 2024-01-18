@@ -1,5 +1,3 @@
-import { defineStore } from "pinia";
-
 interface IUser {
     username: string;
     password: string;
@@ -11,14 +9,11 @@ export const useAuthStore = defineStore("auth", {
         loading: false
     }),
     actions: {
-        async authenticateUser({ username, password }: IUser) {
-            const { data, pending }: any = await useFetch("localhost:8000/login", {
+        async authenticateUser(formdata: any) {
+            const { data, pending }: any = await fetch("http://localhost:8000/login", {
                 method: "post",
-                headers: { "Content-Type": "application/json" },
-                body: {
-                    username,
-                    password
-                }
+                headers: { "Content-Type": "x-www-form-urlencoded" },
+                body: formdata
             })
 
             this.loading = pending
@@ -33,6 +28,6 @@ export const useAuthStore = defineStore("auth", {
             const token = useCookie("token")
             this.authenticated = false;
             token.value = null
-        }
+        },
     }
 })

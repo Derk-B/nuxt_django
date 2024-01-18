@@ -1,7 +1,12 @@
 <script setup lang="ts">
     const siteData = useTodoStore()
-    
-    await callOnce(siteData.fetch)
+
+    //await callOnce(siteData.fetch)
+</script>
+
+
+<script lang="ts" setup>
+
 </script>
 
 <template>

@@ -7,13 +7,19 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import TODO
 from django.core import serializers
 
+
 @require_http_methods(["GET"])
 def todos(request):
     if request.user.is_authenticated:
         todos = TODO.objects.filter(author=request.user).all()
         return HttpResponse(serializers.serialize('json', todos))
-    
+
     return HttpResponse("Not authenticated", status=401)
+
+
+def user(request):
+    return HttpResponse(None)
+
 
 @csrf_exempt
 def login(request):
@@ -26,6 +32,7 @@ def login(request):
         return HttpResponse("Success")
     else:
         return HttpResponse("Fail")
+
 
 def logout(request):
     if request.user.is_authenticated:
