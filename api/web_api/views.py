@@ -1,13 +1,14 @@
 # views.py
 from rest_framework import status
 from rest_framework.response import Response
-from .serializers import UserSerializer
+from .serializers import UserSerializer, TodoSerializer
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from .models import Todo
 
 @api_view(['POST'])
 def login(request):
@@ -39,10 +40,18 @@ def signup(request):
 @permission_classes([IsAuthenticated])
 def logout(request):
     request.user.auth_token.delete()
-    return Response("hallo")
+    return Response("logout success")
 
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def test_token(request):
     return Response("passed for {}".format(request.user.email))
+    
+@api_view(['GET'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def todos(request):
+    todos = Todo.objects.filter(author=request.user).all()
+    data = TodoSerializer(todos, many=True).data
+    return Response(data)
