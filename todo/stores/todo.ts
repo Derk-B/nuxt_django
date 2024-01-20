@@ -19,13 +19,17 @@ export const useTodoStore = defineStore("todoStore", {
     }),
     actions: {
         async fetchTodos() {
+            // This check removes the error: 'localStorage not defined'
+            if (!process.client) {
+                return
+            }
             const token = localStorage.getItem("auth_token")
-            console.log(token);
             const res: any = await getTodos(token)
-            console.log(res)
 
-            if (res != undefined) {
+            if (res == undefined) {
                 navigateTo("/login")
+            } else {
+                this.todos = res
             }
         }
     }
