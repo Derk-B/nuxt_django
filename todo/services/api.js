@@ -13,6 +13,21 @@ export const login = async (username, password) => {
     }
 }
 
+export const register = async (username, password) => {
+    try {
+        const res = await $fetch("http://localhost:8000/signup/", {
+            method: "POST",
+            body: {
+                "username": username,
+                "password": password,
+            }
+        });
+        return res
+    } catch (e) {
+        return e
+    }
+}
+
 export const getTodos = async (token) => {
     try {
         const res = await $fetch("http://localhost:8000/todos/", {

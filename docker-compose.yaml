@@ -1,9 +1,17 @@
 version: "3"
 services:
-  api:
+  api-dev:
     tty: true
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: nuxt_api_dev
     ports: 
       - 8000:8000
+  api:
+    tty: true
+    image: nuxt_api
+    ports: 
+      - 8300:8000
+  web:
+    tty: true
+    image: nuxt_web
+    ports: 
+      - 3000:3000

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-green dark:bg-red">
     <nav class="nav">
       <NuxtLink to="/">Todo app</NuxtLink>
       <ul>
