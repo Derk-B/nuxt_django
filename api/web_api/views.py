@@ -10,6 +10,10 @@ from rest_framework.authentication import SessionAuthentication, TokenAuthentica
 from rest_framework.permissions import IsAuthenticated
 from .models import Todo
 
+@api_view(["GET"])
+def ping(request):
+    return Response("Pong")
+
 @api_view(['POST'])
 def login(request):
     user = get_object_or_404(User, username=request.data['username'])

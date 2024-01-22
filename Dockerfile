@@ -1,20 +1,17 @@
 FROM python:3-alpine
 
-COPY ./api/ /app/
+RUN python3 -m venv /opt/venv
 
-# Install pipenv for virtual environment
+RUN adduser -D myuser
+USER myuser
+WORKDIR /home/myuser
 
-# Install python packages
-RUN pip install pipenv
+COPY --chown=myuser:myuser /api/ /home/myuser/
+RUN pip install -r requirements.txt
 
-WORKDIR /app/
-RUN pipenv install django
-RUN pipenv install djangorestframework
-RUN pipenv install djangorestframework-jwt
-RUN pipenv install djangorestframework-simplejwt
-RUN pipenv install django-cors-headers
+EXPOSE 8000
 
-RUN pipenv run python3 manage.py makemigrations
-RUN pipenv run python3 manage.py migrate
+RUN python3 manage.py makemigrations
+RUN python3 manage.py migrate
 
-CMD ["pipenv run python3 /app/manage.py runserver"]
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
