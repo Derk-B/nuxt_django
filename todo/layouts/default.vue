@@ -1,15 +1,14 @@
 <template>
-  <div class="bg-green dark:bg-red">
-    <nav class="nav">
-      <NuxtLink to="/">Todo app</NuxtLink>
-      <ul>
-        <a href="https://www.derkblom.dev">www.derkblom.dev</a>
-        <a href="https://www.github.com/derk-b/nuxt_django">Source code on github</a>
-      </ul>
-    </nav>
-    <div class="slot">
-      <slot />
-    </div>
+  <nav class="nav">
+    <NuxtLink to="/">Todo app</NuxtLink>
+    <ul>
+      <a href="https://www.derkblom.dev">www.derkblom.dev</a>
+      <a href="https://www.github.com/derk-b/nuxt_django">Source code on github</a>
+    </ul>
+  </nav>
+
+  <div class="slot">
+    <slot />
   </div>
 </template>
 

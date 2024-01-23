@@ -13,6 +13,22 @@ export const login = async (username, password) => {
     }
 }
 
+export const logout = async () => {
+    try {
+        const token = localStorage.getItem("auth_token")
+        await $fetch("http://localhost:8000/logout/", {
+            method: "POST",
+            headers: {
+                "Authorization": "Token " + token,
+            }
+        });
+
+        navigateTo("/login")
+    } catch (e) {
+        return e
+    }
+}
+
 export const register = async (username, password) => {
     try {
         const res = await $fetch("http://localhost:8000/signup/", {
@@ -35,6 +51,51 @@ export const getTodos = async (token) => {
             headers: {
                 "Authorization": "Token " + token,
             }
+        })
+        return res
+    } catch (e) {
+        return undefined
+    }
+}
+
+export const updateTodo = async (todo, token) => {
+    try {
+        const res = await $fetch("http://localhost:8000/update-todo/", {
+            method: "POST",
+            headers: {
+                "Authorization": "Token " + token,
+            },
+            body: todo,
+        })
+        return res
+    } catch (e) {
+        return undefined
+    }
+}
+
+export const deleteTodo = async (todo, token) => {
+    try {
+        const res = await $fetch("http://localhost:8000/delete-todo/", {
+            method: "POST",
+            headers: {
+                "Authorization": "Token " + token,
+            },
+            body: todo,
+        })
+        return res
+    } catch (e) {
+        return undefined
+    }
+}
+
+export const addTodo = async (todo, token) => {
+    try {
+        const res = await $fetch("http://localhost:8000/add-todo/", {
+            method: "POST",
+            headers: {
+                "Authorization": "Token " + token,
+            },
+            body: todo,
         })
         return res
     } catch (e) {

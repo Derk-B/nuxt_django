@@ -20,7 +20,7 @@ def login(request):
     if not user.check_password(request.data['password']):
         return Response({"detail": "not found"}, status=status.HTTP_404_NOT_FOUND)
     
-    token, created = Token.objects.get_or_create(user=user)
+    token, _ = Token.objects.get_or_create(user=user)
     serializer = UserSerializer(instance=user)
     return Response({"token": token.key, "user": serializer.data})
 
@@ -38,7 +38,6 @@ def signup(request):
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 @api_view(["POST"])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -51,7 +50,7 @@ def logout(request):
 @permission_classes([IsAuthenticated])
 def test_token(request):
     return Response("passed for {}".format(request.user.email))
-    
+
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -59,3 +58,46 @@ def todos(request):
     todos = Todo.objects.filter(author=request.user).all()
     data = TodoSerializer(todos, many=True).data
     return Response(data)
+
+@api_view(['POST'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def update_todo(request):
+    serializer = TodoSerializer(data=request.data)
+
+    if serializer.is_valid():
+        Todo.objects.filter(id=request.data["id"]).update(**serializer.data)
+        return Response("Updated")
+    
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(["POST"])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def add_todo(request):
+    title = request.data["title"]
+    description = request.data["description"]
+
+    if title == None or description == None:
+        return Response("Title or description not supplied", status=status.HTTP_400_BAD_REQUEST)
+    
+    todo = Todo(title=request.data["title"], description=request.data["description"], author=request.user)
+
+    todo.save()
+
+    return Response("Todo added")
+    
+   
+
+@api_view(["POST"])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def delete_todo(request):
+    todo = Todo.objects.get(id=request.data["id"])
+
+    if todo != None:
+        Todo.delete(todo)
+        return Response("Deleted todo")
+    
+    return Response("", status=status.HTTP_400_BAD_REQUEST)
+    

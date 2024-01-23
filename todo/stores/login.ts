@@ -11,7 +11,6 @@ export const useLoginStore = defineStore("loginStore", {
             console.log(this.username, this.password)
             const res: any = await login(this.username, this.password)
 
-            console.log(res)
             if (res.token == undefined) {
                 this.message = "Incorrect username or password"
             } else {

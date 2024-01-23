@@ -15,7 +15,7 @@ const registerStore = useRegisterStore()
             <p class="error">{{  registerStore.message }}</p>
             <span>
                 <button type="submit">register</button>
-                <NuxtLink to="/login">Login instead</NuxtLink>
+                <NuxtLink to="/login" class="hover:underline">Login instead</NuxtLink>
             </span>
         </form>
     </section>
@@ -35,14 +35,14 @@ const registerStore = useRegisterStore()
     color: red
     margin-top: 5px
 
-label
+.register-section label
     margin-top: 5px
 
-input
+.register-section input
     padding: 4px
     max-width: 400px
 
-button
+.register-section button
     margin-top: 15px
     margin-right: 10px
     width: 50%
@@ -53,7 +53,7 @@ button
     border-radius: 5px
     font-size: medium
 
-button:hover
+.register-section button:hover
     background-color: $primary
     color: white
     transition-duration: 0.2s

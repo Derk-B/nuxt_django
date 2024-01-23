@@ -6,7 +6,7 @@ const loginStore = useLoginStore()
 
 <template>
     <section class="login-section">
-        <h1>Login page</h1>
+        <h1 class="dark:text-white">Login page</h1>
         <form @submit.prevent="loginStore.submitForm">
             <label for="name">Username</label>
             <input v-model="loginStore.username" type="text" name="name" required/>
@@ -15,7 +15,7 @@ const loginStore = useLoginStore()
             <p class="error">{{  loginStore.message }}</p>
             <span>
                 <button type="submit">Login</button>
-                <NuxtLink to="/register">Register instead</NuxtLink>
+                <NuxtLink to="/register" class="hover:underline">Register instead</NuxtLink>
             </span>
         </form>
     </section>
@@ -35,14 +35,14 @@ const loginStore = useLoginStore()
     color: red
     margin-top: 5px
 
-label
+.login-section label
     margin-top: 5px
 
-input
+.login-section input
     padding: 4px
     max-width: 400px
 
-button
+.login-section button
     margin-top: 15px
     margin-right: 10px
     width: 50%
@@ -53,7 +53,7 @@ button
     border-radius: 5px
     font-size: medium
 
-button:hover
+.login-section button:hover
     background-color: $primary
     color: white
     transition-duration: 0.2s
