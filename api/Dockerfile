@@ -16,6 +16,4 @@ EXPOSE 8000
 RUN python3 manage.py makemigrations
 RUN python3 manage.py migrate
 
-RUN if [ "$AUTO_DEPLOY" = "true" ]; then \
-    CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]; \
-    fi
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]

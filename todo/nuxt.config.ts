@@ -4,6 +4,12 @@ export default defineNuxtConfig({
 
   modules: ['@pinia/nuxt', '@nuxt/ui', '@nuxtjs/tailwindcss'],
 
+  runtimeConfig: {
+    public: {
+      API_URL: process.env.API_URL,
+    },
+  },
+
   vite: {
     css: {
       preprocessorOptions: {

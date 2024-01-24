@@ -1,6 +1,8 @@
+
 export const login = async (username, password) => {
+    const runtimeConfig = useRuntimeConfig()
     try {
-        const res = await $fetch("http://localhost:8000/login/", {
+        const res = await $fetch(`${runtimeConfig.public.API_URL}/login/`, {
             method: "POST",
             body: {
                 "username": username,
@@ -14,9 +16,10 @@ export const login = async (username, password) => {
 }
 
 export const logout = async () => {
+    const runtimeConfig = useRuntimeConfig()
     try {
         const token = localStorage.getItem("auth_token")
-        await $fetch("http://localhost:8000/logout/", {
+        await $fetch(`${runtimeConfig.public.API_URL}/logout/`, {
             method: "POST",
             headers: {
                 "Authorization": "Token " + token,
@@ -30,8 +33,9 @@ export const logout = async () => {
 }
 
 export const register = async (username, password) => {
+    const runtimeConfig = useRuntimeConfig()
     try {
-        const res = await $fetch("http://localhost:8000/signup/", {
+        const res = await $fetch(`${runtimeConfig.public.API_URL}/signup/`, {
             method: "POST",
             body: {
                 "username": username,
@@ -45,8 +49,9 @@ export const register = async (username, password) => {
 }
 
 export const getTodos = async (token) => {
+    const runtimeConfig = useRuntimeConfig()
     try {
-        const res = await $fetch("http://localhost:8000/todos/", {
+        const res = await $fetch(`${runtimeConfig.public.API_URL}/todos/`, {
             method: 'GET',
             headers: {
                 "Authorization": "Token " + token,
@@ -59,8 +64,9 @@ export const getTodos = async (token) => {
 }
 
 export const updateTodo = async (todo, token) => {
+    const runtimeConfig = useRuntimeConfig()
     try {
-        const res = await $fetch("http://localhost:8000/update-todo/", {
+        const res = await $fetch(`${runtimeConfig.public.API_URL}/update-todo/`, {
             method: "POST",
             headers: {
                 "Authorization": "Token " + token,
@@ -74,8 +80,9 @@ export const updateTodo = async (todo, token) => {
 }
 
 export const deleteTodo = async (todo, token) => {
+    const runtimeConfig = useRuntimeConfig()
     try {
-        const res = await $fetch("http://localhost:8000/delete-todo/", {
+        const res = await $fetch(`${runtimeConfig.public.API_URL}/delete-todo/`, {
             method: "POST",
             headers: {
                 "Authorization": "Token " + token,
@@ -89,8 +96,9 @@ export const deleteTodo = async (todo, token) => {
 }
 
 export const addTodo = async (todo, token) => {
+    const runtimeConfig = useRuntimeConfig()
     try {
-        const res = await $fetch("http://localhost:8000/add-todo/", {
+        const res = await $fetch(`${runtimeConfig.public.API_URL}/add-todo/`, {
             method: "POST",
             headers: {
                 "Authorization": "Token " + token,
