@@ -2,6 +2,10 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
+  app: {
+    baseURL: '/todo/',
+  },
+
   modules: ['@pinia/nuxt', '@nuxt/ui', '@nuxtjs/tailwindcss'],
 
   runtimeConfig: {
