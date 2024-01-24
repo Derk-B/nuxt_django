@@ -63,6 +63,7 @@ MIDDLEWARE = [
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
   'http://localhost:3000',
+  'www.derkblom.dev/todo'
 )
 
 ROOT_URLCONF = 'api.urls'
