@@ -61,11 +61,14 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
     'http://www.derkblom.dev',
-    'https://www.derkblom.dev'
+    'https://www.derkblom.dev',
+    'http://derkblom.dev',
+    'https://derkblom.dev'
 )
 
 ALLOWED_HOSTS = [
-    "www.derkblom.dev"
+    "www.derkblom.dev",
+    "derkblom.dev",
 ]
 
 ROOT_URLCONF = 'api.urls'
