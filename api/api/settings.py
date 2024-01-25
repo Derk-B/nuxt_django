@@ -29,8 +29,6 @@ SECRET_KEY = 'django-insecure-e0iw%iv5)j3n+c*e@_u^2^h&df9umx1bg__8@-=@l&wze8o=x!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -48,7 +46,6 @@ INSTALLED_APPS = [
 ]
 
 
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -62,9 +59,14 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
-  'http://localhost:3000',
-  'www.derkblom.dev'
+    'http://localhost:3000',
+    'http://www.derkblom.dev',
+    'https://www.derkblom.dev'
 )
+
+ALLOWED_HOSTS = [
+    "www.derkblom.dev"
+]
 
 ROOT_URLCONF = 'api.urls'
 
